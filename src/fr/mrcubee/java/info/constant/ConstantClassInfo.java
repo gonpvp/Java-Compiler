@@ -23,7 +23,7 @@ public class ConstantClassInfo extends ConstantPoolInfo {
 
     @Override
     public int sizeOfByteArray() {
-        return 3;
+        return super.sizeOfByteArray() + 2;
     }
 
     @Override

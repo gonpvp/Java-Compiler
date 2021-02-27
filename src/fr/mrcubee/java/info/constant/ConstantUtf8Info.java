@@ -48,7 +48,7 @@ public class ConstantUtf8Info extends ConstantPoolInfo {
 
     @Override
     public int sizeOfByteArray() {
-        return 3 + this.length;
+        return super.sizeOfByteArray() + 2 + this.length;
     }
 
     @Override

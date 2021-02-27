@@ -32,7 +32,7 @@ public class ConstantMethodHandleInfo extends ConstantPoolInfo {
 
     @Override
     public int sizeOfByteArray() {
-        return 4;
+        return super.sizeOfByteArray() + 3;
     }
 
     @Override

@@ -17,4 +17,8 @@ public abstract class ConstantPoolInfo implements Serializable {
         return this.type;
     }
 
+    @Override
+    public int sizeOfByteArray() {
+        return 1;
+    }
 }

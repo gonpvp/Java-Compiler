@@ -32,7 +32,7 @@ public class ConstantLongInfo extends ConstantPoolInfo {
 
     @Override
     public int sizeOfByteArray() {
-        return 9;
+        return super.sizeOfByteArray() + 8;
     }
 
     @Override
