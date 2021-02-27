@@ -1,6 +1,6 @@
 package fr.mrcubee.java.attribute;
 
-import fr.mrcubee.java.AccessFlag;
+import fr.mrcubee.java.access.ClassAccessFlag;
 import fr.mrcubee.java.compiler.Serializable;
 import fr.mrcubee.java.constant.ConstantClassInfo;
 import fr.mrcubee.java.constant.ConstantPoolInfo;
@@ -18,14 +18,14 @@ public class ClassAttribute implements Serializable {
     private short minorVersion;
     private short majorVersion;
     private final List<ConstantPoolInfo> constantPoolInfos;
-    private AccessFlag accessFlag;
+    private ClassAccessFlag accessFlag;
     private short nameIndex;
     private short superClassNameIndex;
     private final List<ConstantClassInfo> interfaces;
 
     public ClassAttribute() {
         this.magicNumber = 0xCAFEBABE;
-        this.accessFlag = AccessFlag.PUBLIC;
+        this.accessFlag = ClassAccessFlag.PUBLIC;
         this.constantPoolInfos = new ArrayList<ConstantPoolInfo>();
         this.interfaces = new ArrayList<ConstantClassInfo>();
     }
@@ -54,14 +54,14 @@ public class ClassAttribute implements Serializable {
         return this.constantPoolInfos;
     }
 
-    public void setAccessFlag(AccessFlag accessFlag) {
+    public void setAccessFlag(ClassAccessFlag accessFlag) {
         if (accessFlag == null)
-            this.accessFlag = AccessFlag.PUBLIC;
+            this.accessFlag = ClassAccessFlag.PUBLIC;
         else
             this.accessFlag = accessFlag;
     }
 
-    public AccessFlag getAccessFlag() {
+    public ClassAccessFlag getAccessFlag() {
         return this.accessFlag;
     }
 

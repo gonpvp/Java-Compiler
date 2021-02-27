@@ -1,6 +1,6 @@
-package fr.mrcubee.java;
+package fr.mrcubee.java.access;
 
-public enum AccessFlag {
+public enum ClassAccessFlag {
 
     PUBLIC((short) 0x0001),
     FINAL((short) 0x0010),
@@ -13,7 +13,7 @@ public enum AccessFlag {
 
     private final short value;
 
-    AccessFlag(short value) {
+    ClassAccessFlag(short value) {
         this.value = value;
     }
 
