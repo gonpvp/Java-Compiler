@@ -21,7 +21,7 @@ public class ClassFile implements Serializable {
     public short minorVersion;
     public short majorVersion;
     private final List<ConstantPool> constantPoolInfos;
-    private ClassAccessFlag accessFlag;
+    public short accessFlags;
     public short nameIndex;
     public short superClassNameIndex;
     private final List<ConstantClass> interfaces;
@@ -30,7 +30,7 @@ public class ClassFile implements Serializable {
         this.magicNumber = 0xCAFEBABE;
         this.minorVersion = 0;
         this.majorVersion = 52;
-        this.accessFlag = ClassAccessFlag.PUBLIC;
+        this.accessFlags = ClassAccessFlag.PUBLIC.getValue();
         this.constantPoolInfos = new ArrayList<ConstantPool>();
         this.interfaces = new ArrayList<ConstantClass>();
     }
@@ -39,15 +39,16 @@ public class ClassFile implements Serializable {
         return this.constantPoolInfos;
     }
 
-    public void setAccessFlag(ClassAccessFlag accessFlag) {
-        if (accessFlag == null)
-            this.accessFlag = ClassAccessFlag.PUBLIC;
-        else
-            this.accessFlag = accessFlag;
+    public void setAccessFlags(ClassAccessFlag... accessFlags) {
+        this.accessFlags = 0;
+        if (accessFlags == null || accessFlags.length < 1)
+            return;
+        for (ClassAccessFlag accessFlag : accessFlags)
+            this.accessFlags |= accessFlag.getValue();
     }
 
-    public ClassAccessFlag getAccessFlag() {
-        return this.accessFlag;
+    public ClassAccessFlag[] getAccessFlags() {
+        return ClassAccessFlag.getFromValue(this.accessFlags);
     }
 
     public List<ConstantClass> getInterfaces() {
@@ -77,7 +78,7 @@ public class ClassFile implements Serializable {
             if (bytes != null)
                 byteBuffer.put(bytes);
         }
-        byteBuffer.putShort(this.accessFlag.getValue());
+        byteBuffer.putShort(this.accessFlags);
         byteBuffer.putShort(this.nameIndex);
         byteBuffer.putShort(this.superClassNameIndex);
         byteBuffer.putShort((short) this.interfaces.size());

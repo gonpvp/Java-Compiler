@@ -1,5 +1,7 @@
 package fr.belinguier.java.access;
 
+import java.util.ArrayList;
+
 /**
  * @author Eliott Belinguier
  */
@@ -26,5 +28,16 @@ public enum MethodAccessFlag {
 
     public short getValue() {
         return this.value;
+    }
+
+    public static MethodAccessFlag[] getFromValue(short value) {
+        ArrayList<MethodAccessFlag> result = new ArrayList<MethodAccessFlag>();
+
+        for (MethodAccessFlag methodAccessFlag : MethodAccessFlag.values())
+            if ((value & methodAccessFlag.getValue()) != 0)
+                result.add(methodAccessFlag);
+        if (result.size() < 1)
+            return null;
+        return result.toArray(new MethodAccessFlag[result.size()]);
     }
 }
