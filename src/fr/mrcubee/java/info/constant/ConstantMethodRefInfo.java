@@ -7,27 +7,11 @@ import java.nio.ByteBuffer;
  */
 public class ConstantMethodRefInfo extends ConstantPoolInfo {
 
-    private short classIndex;
-    private short nameAndTypeIndex;
+    public short classIndex;
+    public short nameAndTypeIndex;
 
     public ConstantMethodRefInfo() {
         super(ConstantType.METHOD_REF);
-    }
-
-    public void setClassIndex(short classIndex) {
-        this.classIndex = classIndex;
-    }
-
-    public short getClassIndex() {
-        return this.classIndex;
-    }
-
-    public void setNameAndTypeIndex(short nameAndTypeIndex) {
-        this.nameAndTypeIndex = nameAndTypeIndex;
-    }
-
-    public short getNameAndTypeIndex() {
-        return this.nameAndTypeIndex;
     }
 
     @Override

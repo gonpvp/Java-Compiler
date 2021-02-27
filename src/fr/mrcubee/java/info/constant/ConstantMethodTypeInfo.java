@@ -7,18 +7,10 @@ import java.nio.ByteBuffer;
  */
 public class ConstantMethodTypeInfo extends ConstantPoolInfo {
 
-    private short descriptorIndex;
+    public short descriptorIndex;
 
     public ConstantMethodTypeInfo() {
         super(ConstantType.METHOD_TYPE);
-    }
-
-    public void setDescriptorIndex(short descriptorIndex) {
-        this.descriptorIndex = descriptorIndex;
-    }
-
-    public short getDescriptorIndex() {
-        return this.descriptorIndex;
     }
 
     @Override

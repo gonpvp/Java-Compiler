@@ -7,18 +7,10 @@ import java.nio.ByteBuffer;
  */
 public class ConstantStringInfo extends ConstantPoolInfo {
 
-    private short stringIndex;
+    public short stringIndex;
 
     public ConstantStringInfo() {
         super(ConstantType.STRING);
-    }
-
-    public void setStringIndex(short stringIndex) {
-        this.stringIndex = stringIndex;
-    }
-
-    public short getStringIndex() {
-        return this.stringIndex;
     }
 
     @Override

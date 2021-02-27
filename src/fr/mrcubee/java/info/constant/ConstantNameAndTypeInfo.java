@@ -7,27 +7,11 @@ import java.nio.ByteBuffer;
  */
 public class ConstantNameAndTypeInfo extends ConstantPoolInfo {
 
-    private short nameIndex;
-    private short descriptorIndex;
+    public short nameIndex;
+    public short descriptorIndex;
 
     public ConstantNameAndTypeInfo() {
         super(ConstantType.NAME_AND_TYPE);
-    }
-
-    public void setNameIndex(short nameIndex) {
-        this.nameIndex = nameIndex;
-    }
-
-    public short getNameIndex() {
-        return this.nameIndex;
-    }
-
-    public void setDescriptorIndex(short descriptorIndex) {
-        this.descriptorIndex = descriptorIndex;
-    }
-
-    public short getDescriptorIndex() {
-        return this.descriptorIndex;
     }
 
     @Override

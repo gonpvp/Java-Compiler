@@ -7,18 +7,10 @@ import java.nio.ByteBuffer;
  */
 public class ConstantIntegerInfo extends ConstantPoolInfo {
 
-    private int value;
+    public int value;
 
     public ConstantIntegerInfo() {
         super(ConstantType.INTEGER);
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return this.value;
     }
 
     @Override

@@ -7,27 +7,11 @@ import java.nio.ByteBuffer;
  */
 public class ConstantInvokeDynamicInfo extends ConstantPoolInfo {
 
-    private short bootstrapMethodAttrIndex;
-    private short nameAndTypeIndex;
+    public short bootstrapMethodAttrIndex;
+    public short nameAndTypeIndex;
 
     public ConstantInvokeDynamicInfo() {
         super(ConstantType.INVOKE_DYNAMIC);
-    }
-
-    public void setBootstrapMethodAttrIndex(short bootstrapMethodAttrIndex) {
-        this.bootstrapMethodAttrIndex = bootstrapMethodAttrIndex;
-    }
-
-    public short getBootstrapMethodAttrIndex() {
-        return this.bootstrapMethodAttrIndex;
-    }
-
-    public void setNameAndTypeIndex(short nameAndTypeIndex) {
-        this.nameAndTypeIndex = nameAndTypeIndex;
-    }
-
-    public short getNameAndTypeIndex() {
-        return this.nameAndTypeIndex;
     }
 
     @Override

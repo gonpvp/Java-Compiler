@@ -4,27 +4,11 @@ import java.nio.ByteBuffer;
 
 public class ConstantDoubleInfo extends ConstantPoolInfo {
 
-    private int highValue;
-    private int lowValue;
+    public int highValue;
+    public int lowValue;
 
     public ConstantDoubleInfo() {
         super(ConstantType.DOUBLE);
-    }
-
-    public void setHighValue(int highValue) {
-        this.highValue = highValue;
-    }
-
-    public int getHighValue() {
-        return this.highValue;
-    }
-
-    public void setLowValue(int lowValue) {
-        this.lowValue = lowValue;
-    }
-
-    public int getLowValue() {
-        return this.lowValue;
     }
 
     @Override

@@ -7,18 +7,10 @@ import java.nio.ByteBuffer;
  */
 public class ConstantFloatInfo extends ConstantPoolInfo {
 
-    private int value;
+    public int value;
 
     public ConstantFloatInfo() {
         super(ConstantType.FLOAT);
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public int getValue() {
-        return this.value;
     }
 
     @Override

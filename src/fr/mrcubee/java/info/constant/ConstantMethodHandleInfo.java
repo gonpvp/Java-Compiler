@@ -7,27 +7,11 @@ import java.nio.ByteBuffer;
  */
 public class ConstantMethodHandleInfo extends ConstantPoolInfo {
 
-    private byte referenceKind;
-    private short referenceIndex;
+    public byte referenceKind;
+    public short referenceIndex;
 
     public ConstantMethodHandleInfo() {
         super(ConstantType.METHOD_HANDLE);
-    }
-
-    public void setReferenceKind(byte referenceKind) {
-        this.referenceKind = referenceKind;
-    }
-
-    public byte getReferenceKind() {
-        return this.referenceKind;
-    }
-
-    public void setReferenceIndex(short referenceIndex) {
-        this.referenceIndex = referenceIndex;
-    }
-
-    public short getReferenceIndex() {
-        return this.referenceIndex;
     }
 
     @Override
