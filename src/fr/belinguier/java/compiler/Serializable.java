@@ -1,4 +1,4 @@
-package fr.mrcubee.java.compiler;
+package fr.belinguier.java.compiler;
 
 /**
  * @author Eliott Belinguier

@@ -1,17 +1,17 @@
-package fr.mrcubee.java.info.constant;
+package fr.belinguier.java.info.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantInvokeDynamicInfo extends ConstantPoolInfo {
+public class ConstantInterfaceMethodRefInfo extends ConstantPoolInfo {
 
-    public short bootstrapMethodAttrIndex;
+    public short classIndex;
     public short nameAndTypeIndex;
 
-    public ConstantInvokeDynamicInfo() {
-        super(ConstantType.INVOKE_DYNAMIC);
+    public ConstantInterfaceMethodRefInfo() {
+        super(ConstantType.INTERFACE_METHOD_REF);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ConstantInvokeDynamicInfo extends ConstantPoolInfo {
             return null;
         byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
         byteBuffer.put((byte) getType().getValue());
-        byteBuffer.putShort(this.bootstrapMethodAttrIndex);
+        byteBuffer.putShort(this.classIndex);
         byteBuffer.putShort(this.nameAndTypeIndex);
         return byteBuffer.array();
     }

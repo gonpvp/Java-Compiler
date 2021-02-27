@@ -1,6 +1,6 @@
-package fr.mrcubee.java.info.constant;
+package fr.belinguier.java.info.constant;
 
-import fr.mrcubee.java.compiler.Serializable;
+import fr.belinguier.java.compiler.Serializable;
 
 /**
  * @author Eliott Belinguier

@@ -1,4 +1,4 @@
-package fr.mrcubee.java.info.constant;
+package fr.belinguier.java.info.constant;
 
 /**
  * @author Eliott Belinguier

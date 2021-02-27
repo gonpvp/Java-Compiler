@@ -1,4 +1,4 @@
-package fr.mrcubee.java.access;
+package fr.belinguier.java.access;
 
 public enum ClassAccessFlag {
 

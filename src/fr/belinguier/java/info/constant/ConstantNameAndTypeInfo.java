@@ -1,22 +1,22 @@
-package fr.mrcubee.java.info.constant;
+package fr.belinguier.java.info.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantLongInfo extends ConstantPoolInfo {
+public class ConstantNameAndTypeInfo extends ConstantPoolInfo {
 
-    public int highValue;
-    public int lowValue;
+    public short nameIndex;
+    public short descriptorIndex;
 
-    public ConstantLongInfo() {
-        super(ConstantType.LONG);
+    public ConstantNameAndTypeInfo() {
+        super(ConstantType.NAME_AND_TYPE);
     }
 
     @Override
     public int sizeOfByteArray() {
-        return super.sizeOfByteArray() + 8;
+        return super.sizeOfByteArray() + 4;
     }
 
     @Override
@@ -27,8 +27,8 @@ public class ConstantLongInfo extends ConstantPoolInfo {
             return null;
         byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
         byteBuffer.put((byte) getType().getValue());
-        byteBuffer.putInt(this.highValue);
-        byteBuffer.putInt(this.lowValue);
+        byteBuffer.putShort(this.nameIndex);
+        byteBuffer.putShort(this.descriptorIndex);
         return byteBuffer.array();
     }
 }

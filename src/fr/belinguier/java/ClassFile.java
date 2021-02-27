@@ -1,9 +1,9 @@
-package fr.mrcubee.java;
+package fr.belinguier.java;
 
-import fr.mrcubee.java.access.ClassAccessFlag;
-import fr.mrcubee.java.compiler.Serializable;
-import fr.mrcubee.java.info.constant.ConstantClassInfo;
-import fr.mrcubee.java.info.constant.ConstantPoolInfo;
+import fr.belinguier.java.access.ClassAccessFlag;
+import fr.belinguier.java.compiler.Serializable;
+import fr.belinguier.java.info.constant.ConstantClassInfo;
+import fr.belinguier.java.info.constant.ConstantPoolInfo;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
