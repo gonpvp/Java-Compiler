@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class ClassFile implements Serializable {
 
-    private final int magicNumber;
-    private short minorVersion;
-    private short majorVersion;
+    public int magicNumber;
+    public short minorVersion;
+    public short majorVersion;
     private final List<ConstantPoolInfo> constantPoolInfos;
     private ClassAccessFlag accessFlag;
-    private short nameIndex;
-    private short superClassNameIndex;
+    public short nameIndex;
+    public short superClassNameIndex;
     private final List<ConstantClassInfo> interfaces;
 
     public ClassFile() {
@@ -28,26 +28,6 @@ public class ClassFile implements Serializable {
         this.accessFlag = ClassAccessFlag.PUBLIC;
         this.constantPoolInfos = new ArrayList<ConstantPoolInfo>();
         this.interfaces = new ArrayList<ConstantClassInfo>();
-    }
-
-    public int getMagicNumber() {
-        return this.magicNumber;
-    }
-
-    public void setMinorVersion(short minorVersion) {
-        this.minorVersion = minorVersion;
-    }
-
-    public short getMinorVersion() {
-        return this.minorVersion;
-    }
-
-    public void setMajorVersion(short majorVersion) {
-        this.majorVersion = majorVersion;
-    }
-
-    public short getMajorVersion() {
-        return this.majorVersion;
     }
 
     public List<ConstantPoolInfo> getConstantPoolInfos() {
@@ -63,22 +43,6 @@ public class ClassFile implements Serializable {
 
     public ClassAccessFlag getAccessFlag() {
         return this.accessFlag;
-    }
-
-    public void setNameIndex(short nameIndex) {
-        this.nameIndex = nameIndex;
-    }
-
-    public short getNameIndex() {
-        return this.nameIndex;
-    }
-
-    public void setSuperClassNameIndex(short superClassNameIndex) {
-        this.superClassNameIndex = superClassNameIndex;
-    }
-
-    public short getSuperClassNameIndex() {
-        return this.superClassNameIndex;
     }
 
     public List<ConstantClassInfo> getInterfaces() {
