@@ -6,6 +6,9 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Eliott Belinguier
+ */
 public abstract class AttributeCode extends Attribute {
 
     public short maxStack;

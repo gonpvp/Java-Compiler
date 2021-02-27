@@ -2,6 +2,9 @@ package fr.belinguier.java.info.constant;
 
 import java.nio.ByteBuffer;
 
+/**
+ * @author Eliott Belinguier
+ */
 public class ConstantDoubleInfo extends ConstantPoolInfo {
 
     public int highValue;

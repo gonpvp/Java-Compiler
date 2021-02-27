@@ -1,5 +1,8 @@
 package fr.belinguier.java.access;
 
+/**
+ * @author Eliott Belinguier
+ */
 public enum FieldAccessFlag {
 
     PUBLIC((short) 0x0001),

@@ -2,6 +2,9 @@ package fr.belinguier.java.attribute;
 
 import java.nio.ByteBuffer;
 
+/**
+ * @author Eliott Belinguier
+ */
 public class AttributeConstantValue extends Attribute {
 
     public short constantValueIndex;
