@@ -1,4 +1,4 @@
-package fr.belinguier.java.info.constant;
+package fr.belinguier.java.constant;
 
 /**
  * @author Eliott Belinguier

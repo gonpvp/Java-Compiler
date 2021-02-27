@@ -1,16 +1,17 @@
-package fr.belinguier.java.info.constant;
+package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantFloatInfo extends ConstantPoolInfo {
+public class ConstantMethodRef extends ConstantPool {
 
-    public int value;
+    public short classIndex;
+    public short nameAndTypeIndex;
 
-    public ConstantFloatInfo() {
-        super(ConstantType.FLOAT);
+    public ConstantMethodRef() {
+        super(ConstantType.METHOD_REF);
     }
 
     @Override
@@ -26,7 +27,8 @@ public class ConstantFloatInfo extends ConstantPoolInfo {
             return null;
         byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
         byteBuffer.put((byte) getType().getValue());
-        byteBuffer.putInt(this.value);
+        byteBuffer.putShort(this.classIndex);
+        byteBuffer.putShort(this.nameAndTypeIndex);
         return byteBuffer.array();
     }
 }

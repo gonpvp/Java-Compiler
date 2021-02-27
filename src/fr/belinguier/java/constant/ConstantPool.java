@@ -1,15 +1,15 @@
-package fr.belinguier.java.info.constant;
+package fr.belinguier.java.constant;
 
 import fr.belinguier.java.compiler.Serializable;
 
 /**
  * @author Eliott Belinguier
  */
-public abstract class ConstantPoolInfo implements Serializable {
+public abstract class ConstantPool implements Serializable {
 
     private final ConstantType type;
 
-    public ConstantPoolInfo(ConstantType type) {
+    public ConstantPool(ConstantType type) {
         this.type = type;
     }
 

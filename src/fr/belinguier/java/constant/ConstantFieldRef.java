@@ -1,21 +1,22 @@
-package fr.belinguier.java.info.constant;
+package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantStringInfo extends ConstantPoolInfo {
+public class ConstantFieldRef extends ConstantPool {
 
-    public short stringIndex;
+    public short classIndex;
+    public short nameAndTypeIndex;
 
-    public ConstantStringInfo() {
-        super(ConstantType.STRING);
+    public ConstantFieldRef() {
+        super(ConstantType.FIELD_REF);
     }
 
     @Override
     public int sizeOfByteArray() {
-        return super.sizeOfByteArray() + 2;
+        return super.sizeOfByteArray() + 4;
     }
 
     @Override
@@ -26,7 +27,8 @@ public class ConstantStringInfo extends ConstantPoolInfo {
             return null;
         byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
         byteBuffer.put((byte) getType().getValue());
-        byteBuffer.putShort(this.stringIndex);
+        byteBuffer.putShort(this.classIndex);
+        byteBuffer.putShort(this.nameAndTypeIndex);
         return byteBuffer.array();
     }
 }

@@ -2,9 +2,12 @@ package fr.belinguier.java;
 
 import fr.belinguier.java.access.ClassAccessFlag;
 import fr.belinguier.java.compiler.Serializable;
-import fr.belinguier.java.info.constant.ConstantClassInfo;
-import fr.belinguier.java.info.constant.ConstantPoolInfo;
+import fr.belinguier.java.constant.ConstantClass;
+import fr.belinguier.java.constant.ConstantPool;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,20 +20,22 @@ public class ClassFile implements Serializable {
     public int magicNumber;
     public short minorVersion;
     public short majorVersion;
-    private final List<ConstantPoolInfo> constantPoolInfos;
+    private final List<ConstantPool> constantPoolInfos;
     private ClassAccessFlag accessFlag;
     public short nameIndex;
     public short superClassNameIndex;
-    private final List<ConstantClassInfo> interfaces;
+    private final List<ConstantClass> interfaces;
 
     public ClassFile() {
         this.magicNumber = 0xCAFEBABE;
+        this.minorVersion = 0;
+        this.majorVersion = 52;
         this.accessFlag = ClassAccessFlag.PUBLIC;
-        this.constantPoolInfos = new ArrayList<ConstantPoolInfo>();
-        this.interfaces = new ArrayList<ConstantClassInfo>();
+        this.constantPoolInfos = new ArrayList<ConstantPool>();
+        this.interfaces = new ArrayList<ConstantClass>();
     }
 
-    public List<ConstantPoolInfo> getConstantPoolInfos() {
+    public List<ConstantPool> getConstantPoolInfos() {
         return this.constantPoolInfos;
     }
 
@@ -45,7 +50,7 @@ public class ClassFile implements Serializable {
         return this.accessFlag;
     }
 
-    public List<ConstantClassInfo> getInterfaces() {
+    public List<ConstantClass> getInterfaces() {
         return this.interfaces;
     }
 
@@ -53,7 +58,7 @@ public class ClassFile implements Serializable {
     public int sizeOfByteArray() {
         int constantSize = 0;
 
-        for (ConstantPoolInfo constantPoolInfo : this.constantPoolInfos)
+        for (ConstantPool constantPoolInfo : this.constantPoolInfos)
             constantSize += constantPoolInfo.sizeOfByteArray();
         return 10 + constantSize + 8;
     }
@@ -67,7 +72,7 @@ public class ClassFile implements Serializable {
         byteBuffer.putShort(minorVersion);
         byteBuffer.putShort(majorVersion);
         byteBuffer.putShort((short) this.constantPoolInfos.size());
-        for (ConstantPoolInfo constantPoolInfo : this.constantPoolInfos) {
+        for (ConstantPool constantPoolInfo : this.constantPoolInfos) {
             bytes = constantPoolInfo.toByte();
             if (bytes != null)
                 byteBuffer.put(bytes);
@@ -76,11 +81,29 @@ public class ClassFile implements Serializable {
         byteBuffer.putShort(this.nameIndex);
         byteBuffer.putShort(this.superClassNameIndex);
         byteBuffer.putShort((short) this.interfaces.size());
-        for (ConstantClassInfo constantClassInfo : this.interfaces) {
+        for (ConstantClass constantClassInfo : this.interfaces) {
             bytes = constantClassInfo.toByte();
             if (bytes != null)
                 byteBuffer.put(bytes);
         }
         return byteBuffer.array();
+    }
+
+    public boolean write(File file) {
+        FileOutputStream fileOutputStream;
+        byte[] bytes;
+
+        if (file == null || (file.exists() && !file.delete()))
+            return false;
+        bytes = toByte();
+        if (bytes == null || bytes.length < 1)
+            return false;
+        try {
+            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(bytes);
+            fileOutputStream.close();
+            return true;
+        } catch (IOException ignored) {};
+        return false;
     }
 }

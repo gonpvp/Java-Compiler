@@ -1,17 +1,17 @@
-package fr.belinguier.java.info.constant;
+package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantLongInfo extends ConstantPoolInfo {
+public class ConstantDouble extends ConstantPool {
 
     public int highValue;
     public int lowValue;
 
-    public ConstantLongInfo() {
-        super(ConstantType.LONG);
+    public ConstantDouble() {
+        super(ConstantType.DOUBLE);
     }
 
     @Override

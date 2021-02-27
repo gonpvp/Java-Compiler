@@ -1,4 +1,4 @@
-package fr.belinguier.java.info.constant;
+package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -6,11 +6,11 @@ import java.nio.charset.StandardCharsets;
 /**
  * @author Eliott Belinguier
  */
-public class ConstantUtf8Info extends ConstantPoolInfo {
+public class ConstantUtf8 extends ConstantPool {
 
     public byte[] bytes;
 
-    public ConstantUtf8Info() {
+    public ConstantUtf8() {
         super(ConstantType.UTF_8);
     }
 
