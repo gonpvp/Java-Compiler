@@ -1,4 +1,4 @@
-package fr.mrcubee.java.attribute;
+package fr.mrcubee.java;
 
 import fr.mrcubee.java.access.ClassAccessFlag;
 import fr.mrcubee.java.compiler.Serializable;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author Eliott Belinguier
  */
-public class ClassAttribute implements Serializable {
+public class ClassFile implements Serializable {
 
     private final int magicNumber;
     private short minorVersion;
@@ -23,7 +23,7 @@ public class ClassAttribute implements Serializable {
     private short superClassNameIndex;
     private final List<ConstantClassInfo> interfaces;
 
-    public ClassAttribute() {
+    public ClassFile() {
         this.magicNumber = 0xCAFEBABE;
         this.accessFlag = ClassAccessFlag.PUBLIC;
         this.constantPoolInfos = new ArrayList<ConstantPoolInfo>();
