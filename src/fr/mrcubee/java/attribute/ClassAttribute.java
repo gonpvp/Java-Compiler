@@ -1,27 +1,33 @@
-package fr.mrcubee.java;
+package fr.mrcubee.java.attribute;
 
+import fr.mrcubee.java.AccessFlag;
 import fr.mrcubee.java.compiler.Serializable;
+import fr.mrcubee.java.constant.ConstantClassInfo;
 import fr.mrcubee.java.constant.ConstantPoolInfo;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Eliott Belinguier
  */
-public class ClassInfo implements Serializable {
+public class ClassAttribute implements Serializable {
 
     private final int magicNumber;
     private short minorVersion;
     private short majorVersion;
-    private List<ConstantPoolInfo> constantPoolInfos;
+    private final List<ConstantPoolInfo> constantPoolInfos;
     private AccessFlag accessFlag;
     private short nameIndex;
     private short superClassNameIndex;
+    private final List<ConstantClassInfo> interfaces;
 
-    public ClassInfo() {
+    public ClassAttribute() {
         this.magicNumber = 0xCAFEBABE;
+        this.accessFlag = AccessFlag.PUBLIC;
         this.constantPoolInfos = new ArrayList<ConstantPoolInfo>();
+        this.interfaces = new ArrayList<ConstantClassInfo>();
     }
 
     public int getMagicNumber() {
@@ -70,18 +76,47 @@ public class ClassInfo implements Serializable {
     public void setSuperClassNameIndex(short superClassNameIndex) {
         this.superClassNameIndex = superClassNameIndex;
     }
-    
+
     public short getSuperClassNameIndex() {
         return this.superClassNameIndex;
     }
 
+    public List<ConstantClassInfo> getInterfaces() {
+        return this.interfaces;
+    }
+
     @Override
     public int sizeOfByteArray() {
-        return 0;
+        int constantSize = 0;
+
+        for (ConstantPoolInfo constantPoolInfo : this.constantPoolInfos)
+            constantSize += constantPoolInfo.sizeOfByteArray();
+        return 10 + constantSize + 8;
     }
 
     @Override
     public byte[] toByte() {
-        return new byte[0];
+        ByteBuffer byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
+        byte[] bytes;
+
+        byteBuffer.putInt(magicNumber);
+        byteBuffer.putShort(minorVersion);
+        byteBuffer.putShort(majorVersion);
+        byteBuffer.putShort((short) this.constantPoolInfos.size());
+        for (ConstantPoolInfo constantPoolInfo : this.constantPoolInfos) {
+            bytes = constantPoolInfo.toByte();
+            if (bytes != null)
+                byteBuffer.put(bytes);
+        }
+        byteBuffer.putShort(this.accessFlag.getValue());
+        byteBuffer.putShort(this.nameIndex);
+        byteBuffer.putShort(this.superClassNameIndex);
+        byteBuffer.putShort((short) this.interfaces.size());
+        for (ConstantClassInfo constantClassInfo : this.interfaces) {
+            bytes = constantClassInfo.toByte();
+            if (bytes != null)
+                byteBuffer.put(bytes);
+        }
+        return byteBuffer.array();
     }
 }
