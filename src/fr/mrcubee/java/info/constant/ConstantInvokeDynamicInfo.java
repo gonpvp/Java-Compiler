@@ -1,25 +1,25 @@
-package fr.mrcubee.java.constant;
+package fr.mrcubee.java.info.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantFieldRefInfo extends ConstantPoolInfo {
+public class ConstantInvokeDynamicInfo extends ConstantPoolInfo {
 
-    private short classIndex;
+    private short bootstrapMethodAttrIndex;
     private short nameAndTypeIndex;
 
-    public ConstantFieldRefInfo() {
-        super(ConstantType.FIELD_REF);
+    public ConstantInvokeDynamicInfo() {
+        super(ConstantType.INVOKE_DYNAMIC);
     }
 
-    public void setClassIndex(short classIndex) {
-        this.classIndex = classIndex;
+    public void setBootstrapMethodAttrIndex(short bootstrapMethodAttrIndex) {
+        this.bootstrapMethodAttrIndex = bootstrapMethodAttrIndex;
     }
 
-    public short getClassIndex() {
-        return this.classIndex;
+    public short getBootstrapMethodAttrIndex() {
+        return this.bootstrapMethodAttrIndex;
     }
 
     public void setNameAndTypeIndex(short nameAndTypeIndex) {
@@ -43,7 +43,7 @@ public class ConstantFieldRefInfo extends ConstantPoolInfo {
             return null;
         byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
         byteBuffer.put((byte) getType().getValue());
-        byteBuffer.putShort(this.classIndex);
+        byteBuffer.putShort(this.bootstrapMethodAttrIndex);
         byteBuffer.putShort(this.nameAndTypeIndex);
         return byteBuffer.array();
     }

@@ -1,16 +1,16 @@
-package fr.mrcubee.java.constant;
+package fr.mrcubee.java.info.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantFloatInfo extends ConstantPoolInfo {
+public class ConstantIntegerInfo extends ConstantPoolInfo {
 
     private int value;
 
-    public ConstantFloatInfo() {
-        super(ConstantType.FLOAT);
+    public ConstantIntegerInfo() {
+        super(ConstantType.INTEGER);
     }
 
     public void setValue(int value) {

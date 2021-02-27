@@ -1,17 +1,17 @@
-package fr.mrcubee.java.constant;
+package fr.mrcubee.java.info.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantInterfaceMethodRefInfo extends ConstantPoolInfo {
+public class ConstantFieldRefInfo extends ConstantPoolInfo {
 
     private short classIndex;
     private short nameAndTypeIndex;
 
-    public ConstantInterfaceMethodRefInfo() {
-        super(ConstantType.INTERFACE_METHOD_REF);
+    public ConstantFieldRefInfo() {
+        super(ConstantType.FIELD_REF);
     }
 
     public void setClassIndex(short classIndex) {

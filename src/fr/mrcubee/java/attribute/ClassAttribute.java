@@ -2,8 +2,8 @@ package fr.mrcubee.java.attribute;
 
 import fr.mrcubee.java.access.ClassAccessFlag;
 import fr.mrcubee.java.compiler.Serializable;
-import fr.mrcubee.java.constant.ConstantClassInfo;
-import fr.mrcubee.java.constant.ConstantPoolInfo;
+import fr.mrcubee.java.info.constant.ConstantClassInfo;
+import fr.mrcubee.java.info.constant.ConstantPoolInfo;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package fr.mrcubee.java.constant;
+package fr.mrcubee.java.info.constant;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;

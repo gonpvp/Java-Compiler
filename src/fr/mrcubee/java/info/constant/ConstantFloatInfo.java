@@ -1,29 +1,29 @@
-package fr.mrcubee.java.constant;
+package fr.mrcubee.java.info.constant;
 
 import java.nio.ByteBuffer;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantStringInfo extends ConstantPoolInfo {
+public class ConstantFloatInfo extends ConstantPoolInfo {
 
-    private short stringIndex;
+    private int value;
 
-    public ConstantStringInfo() {
-        super(ConstantType.STRING);
+    public ConstantFloatInfo() {
+        super(ConstantType.FLOAT);
     }
 
-    public void setStringIndex(short stringIndex) {
-        this.stringIndex = stringIndex;
+    public void setValue(int value) {
+        this.value = value;
     }
 
-    public short getStringIndex() {
-        return this.stringIndex;
+    public int getValue() {
+        return this.value;
     }
 
     @Override
     public int sizeOfByteArray() {
-        return 3;
+        return 5;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ConstantStringInfo extends ConstantPoolInfo {
             return null;
         byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
         byteBuffer.put((byte) getType().getValue());
-        byteBuffer.putShort(this.stringIndex);
+        byteBuffer.putInt(this.value);
         return byteBuffer.array();
     }
 }
