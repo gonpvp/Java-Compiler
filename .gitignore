@@ -1,4 +1,11 @@
+# Intellij
 out/
 .idea/
-target/
 **.iml
+
+# Maven
+target/
+
+# Test
+Test.java
+test/
