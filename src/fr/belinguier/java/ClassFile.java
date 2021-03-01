@@ -1,8 +1,8 @@
 package fr.belinguier.java;
 
 import fr.belinguier.java.access.ClassAccessFlag;
+import fr.belinguier.java.attribute.Attribute;
 import fr.belinguier.java.compiler.Serializable;
-import fr.belinguier.java.constant.ConstantClass;
 import fr.belinguier.java.constant.ConstantPool;
 
 import java.io.File;
@@ -20,23 +20,29 @@ public class ClassFile implements Serializable {
     public int magicNumber;
     public short minorVersion;
     public short majorVersion;
-    private final List<ConstantPool> constantPoolInfos;
+    private final List<ConstantPool> constantPools;
     public short accessFlags;
-    public short nameIndex;
+    public short classIndex;
     public short superClassNameIndex;
-    private final List<ConstantClass> interfaces;
+    private final List<Short> interfaces;
+    private final List<Field> fields;
+    private final List<Method> methods;
+    private final List<Attribute> attributes;
 
     public ClassFile() {
         this.magicNumber = 0xCAFEBABE;
         this.minorVersion = 0;
         this.majorVersion = 52;
         this.accessFlags = ClassAccessFlag.PUBLIC.getValue();
-        this.constantPoolInfos = new ArrayList<ConstantPool>();
-        this.interfaces = new ArrayList<ConstantClass>();
+        this.constantPools = new ArrayList<ConstantPool>();
+        this.interfaces = new ArrayList<Short>();
+        this.fields = new ArrayList<Field>();
+        this.methods = new ArrayList<Method>();
+        this.attributes = new ArrayList<Attribute>();
     }
 
-    public List<ConstantPool> getConstantPoolInfos() {
-        return this.constantPoolInfos;
+    public List<ConstantPool> getConstantPools() {
+        return this.constantPools;
     }
 
     public void setAccessFlags(ClassAccessFlag... accessFlags) {
@@ -51,41 +57,86 @@ public class ClassFile implements Serializable {
         return ClassAccessFlag.getFromValue(this.accessFlags);
     }
 
-    public List<ConstantClass> getInterfaces() {
+    public List<Short> getInterfaces() {
         return this.interfaces;
+    }
+
+    public List<Field> getFields() {
+        return this.fields;
+    }
+
+    public List<Method> getMethods() {
+        return this.methods;
+    }
+
+    public List<Attribute> getAttributes() {
+        return this.attributes;
     }
 
     @Override
     public int sizeOfByteArray() {
-        int constantSize = 0;
+        int constantLength = 0;
+        int interfaceLength = 0;
+        int fieldLength = 0;
+        int methodLength = 0;
+        int attributeLength = 0;
 
-        for (ConstantPool constantPoolInfo : this.constantPoolInfos)
-            constantSize += constantPoolInfo.sizeOfByteArray();
-        return 10 + constantSize + 8;
+        for (ConstantPool constantPoolInfo : this.constantPools)
+            constantLength += constantPoolInfo.sizeOfByteArray();
+        interfaceLength = this.interfaces.size() * 2;
+        for (Field field : this.fields)
+            fieldLength += field.sizeOfByteArray();
+        for (Method method : this.methods)
+            methodLength += method.sizeOfByteArray();
+        for (Attribute attribute : this.attributes)
+            attributeLength += attribute.sizeOfByteArray();
+        System.out.println("ConstantLength: " + constantLength);
+        System.out.println("InterfaceLength: " + interfaceLength);
+        System.out.println("FieldLength: " + fieldLength);
+        System.out.println("MethodLength: " + methodLength);
+        System.out.println("AttributeLength: " + attributeLength);
+        return 26 + constantLength + interfaceLength + fieldLength + methodLength + attributeLength;
     }
 
     @Override
     public byte[] toByte() {
         ByteBuffer byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
-        byte[] bytes;
+        byte[] temp;
 
         byteBuffer.putInt(magicNumber);
         byteBuffer.putShort(minorVersion);
         byteBuffer.putShort(majorVersion);
-        byteBuffer.putShort((short) this.constantPoolInfos.size());
-        for (ConstantPool constantPoolInfo : this.constantPoolInfos) {
-            bytes = constantPoolInfo.toByte();
-            if (bytes != null)
-                byteBuffer.put(bytes);
+        byteBuffer.putShort((short) (this.constantPools.size() + 1));
+        for (ConstantPool constantPool : this.constantPools) {
+            temp = constantPool.toByte();
+            if (temp != null)
+                byteBuffer.put(temp);
         }
         byteBuffer.putShort(this.accessFlags);
-        byteBuffer.putShort(this.nameIndex);
+        byteBuffer.putShort(this.classIndex);
         byteBuffer.putShort(this.superClassNameIndex);
         byteBuffer.putShort((short) this.interfaces.size());
-        for (ConstantClass constantClassInfo : this.interfaces) {
-            bytes = constantClassInfo.toByte();
-            if (bytes != null)
-                byteBuffer.put(bytes);
+        for (Short interfaceIndex : this.interfaces) {
+            if (interfaceIndex != null)
+                byteBuffer.putShort(interfaceIndex);
+        }
+        byteBuffer.putShort((short) this.fields.size());
+        for (Field field : this.fields) {
+            temp = field.toByte();
+            if (temp != null)
+                byteBuffer.put(temp);
+        }
+        byteBuffer.putShort((short) this.methods.size());
+        for (Method method : this.methods) {
+            temp = method.toByte();
+            if (temp != null)
+                byteBuffer.put(temp);
+        }
+        byteBuffer.putShort((short) this.attributes.size());
+        for (Attribute attribute : this.attributes) {
+            temp = attribute.toByte();
+            if (temp != null)
+                byteBuffer.put(temp);
         }
         return byteBuffer.array();
     }
