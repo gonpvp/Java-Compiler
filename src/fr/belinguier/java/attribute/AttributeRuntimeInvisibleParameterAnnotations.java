@@ -6,6 +6,9 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Eliott Belinguier
+ */
 public class AttributeRuntimeInvisibleParameterAnnotations extends Attribute {
 
     private final List<ParameterAnnotation> parameterAnnotations;

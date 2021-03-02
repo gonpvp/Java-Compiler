@@ -4,6 +4,9 @@ import fr.belinguier.java.compiler.Serializable;
 
 import java.nio.ByteBuffer;
 
+/**
+ * @author Eliott Belinguier
+ */
 public class LineNumber implements Serializable {
 
     public short startPc;
