@@ -1,11 +1,12 @@
 package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
+import java.util.Objects;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantInvokeDynamic extends ConstantPool {
+public final class ConstantInvokeDynamic extends ConstantPool {
 
     public short bootstrapMethodAttrIndex;
     public short nameAndTypeIndex;
@@ -30,5 +31,10 @@ public class ConstantInvokeDynamic extends ConstantPool {
         byteBuffer.putShort(this.bootstrapMethodAttrIndex);
         byteBuffer.putShort(this.nameAndTypeIndex);
         return byteBuffer.array();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), this.bootstrapMethodAttrIndex, this.nameAndTypeIndex);
     }
 }

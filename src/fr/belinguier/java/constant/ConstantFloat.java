@@ -1,13 +1,14 @@
 package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
+import java.util.Objects;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantFloat extends ConstantPool {
+public final class ConstantFloat extends ConstantPool {
 
-    public int value;
+    public float value;
 
     public ConstantFloat() {
         super(ConstantType.FLOAT);
@@ -26,7 +27,12 @@ public class ConstantFloat extends ConstantPool {
             return null;
         byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
         byteBuffer.put((byte) getType().getValue());
-        byteBuffer.putInt(this.value);
+        byteBuffer.putFloat(this.value);
         return byteBuffer.array();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), this.value);
     }
 }

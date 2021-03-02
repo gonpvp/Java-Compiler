@@ -1,11 +1,12 @@
 package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
+import java.util.Objects;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantInteger extends ConstantPool {
+public final class ConstantInteger extends ConstantPool {
 
     public int value;
 
@@ -28,5 +29,10 @@ public class ConstantInteger extends ConstantPool {
         byteBuffer.put((byte) getType().getValue());
         byteBuffer.putInt(this.value);
         return byteBuffer.array();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), this.value);
     }
 }

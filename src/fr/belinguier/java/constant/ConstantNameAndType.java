@@ -1,11 +1,12 @@
 package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
+import java.util.Objects;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantNameAndType extends ConstantPool {
+public final class ConstantNameAndType extends ConstantPool {
 
     public short nameIndex;
     public short descriptorIndex;
@@ -30,5 +31,10 @@ public class ConstantNameAndType extends ConstantPool {
         byteBuffer.putShort(this.nameIndex);
         byteBuffer.putShort(this.descriptorIndex);
         return byteBuffer.array();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), this.nameIndex, this.descriptorIndex);
     }
 }

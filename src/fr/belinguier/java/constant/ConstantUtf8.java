@@ -2,11 +2,12 @@ package fr.belinguier.java.constant;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * @author Eliott Belinguier
  */
-public class ConstantUtf8 extends ConstantPool {
+public final class ConstantUtf8 extends ConstantPool {
 
     public byte[] bytes;
 
@@ -49,5 +50,10 @@ public class ConstantUtf8 extends ConstantPool {
         if (this.bytes != null)
             byteBuffer.put(this.bytes, 0, this.bytes.length);
         return byteBuffer.array();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType(), this.bytes);
     }
 }
