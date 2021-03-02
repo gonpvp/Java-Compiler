@@ -11,21 +11,21 @@ import java.util.List;
  */
 public class AttributeLocalVariableTypeTable extends Attribute {
 
-    private final List<LocalVariableType> localVariableTypeList;
+    private final List<LocalVariableType> localVariableTypes;
 
     public AttributeLocalVariableTypeTable() {
-        this.localVariableTypeList = new ArrayList<LocalVariableType>();
+        this.localVariableTypes = new ArrayList<LocalVariableType>();
     }
 
-    public List<LocalVariableType> getLocalVariableTypeList() {
-        return this.localVariableTypeList;
+    public List<LocalVariableType> getLocalVariableTypes() {
+        return this.localVariableTypes;
     }
 
     @Override
     public int sizeOfByteArray() {
         int lineNumberLength = 0;
 
-        for (LocalVariableType localVariableType : this.localVariableTypeList)
+        for (LocalVariableType localVariableType : this.localVariableTypes)
             lineNumberLength += localVariableType.sizeOfByteArray();
         return super.sizeOfByteArray() + 2 + lineNumberLength;
     }
@@ -37,8 +37,8 @@ public class AttributeLocalVariableTypeTable extends Attribute {
 
         byteBuffer.putShort(this.nameIndex);
         byteBuffer.putInt(getLength());
-        byteBuffer.putShort((short) this.localVariableTypeList.size());
-        for (LocalVariableType localVariableType : this.localVariableTypeList) {
+        byteBuffer.putShort((short) this.localVariableTypes.size());
+        for (LocalVariableType localVariableType : this.localVariableTypes) {
             temp = localVariableType.toByte();
             if (temp != null)
                 byteBuffer.put(temp);
