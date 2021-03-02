@@ -90,11 +90,6 @@ public class ClassFile implements Serializable {
             methodLength += method.sizeOfByteArray();
         for (Attribute attribute : this.attributes)
             attributeLength += attribute.sizeOfByteArray();
-        System.out.println("ConstantLength: " + constantLength);
-        System.out.println("InterfaceLength: " + interfaceLength);
-        System.out.println("FieldLength: " + fieldLength);
-        System.out.println("MethodLength: " + methodLength);
-        System.out.println("AttributeLength: " + attributeLength);
         return 26 + constantLength + interfaceLength + fieldLength + methodLength + attributeLength;
     }
 
