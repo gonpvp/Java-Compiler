@@ -54,6 +54,6 @@ public final class ConstantUtf8 extends ConstantPool {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), this.bytes);
+        return Objects.hash(getType(), getString());
     }
 }
