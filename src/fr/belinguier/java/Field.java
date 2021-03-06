@@ -5,8 +5,8 @@ import fr.belinguier.java.attribute.Attribute;
 import fr.belinguier.java.compiler.Serializable;
 
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Eliott Belinguier
@@ -16,10 +16,10 @@ public class Field implements Serializable {
     public short accessFlags;
     public short nameIndex;
     public short descriptorIndex;
-    private final List<Attribute> attributes;
+    private final Set<Attribute> attributes;
 
     public Field() {
-        this.attributes = new ArrayList<Attribute>();
+        this.attributes = new HashSet<Attribute>();
     }
 
     public void setAccessFlags(FieldAccessFlag... accessFlags) {
@@ -34,7 +34,7 @@ public class Field implements Serializable {
         return FieldAccessFlag.getFromValue(this.accessFlags);
     }
 
-    public List<Attribute> getAttributes() {
+    public Set<Attribute> getAttributes() {
         return this.attributes;
     }
 
