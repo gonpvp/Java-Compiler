@@ -28,6 +28,17 @@ public enum InnerClassAccessFlag {
         return this.value;
     }
 
+    public static short toValue(InnerClassAccessFlag... innerClassAccessFlags) {
+        short result;
+
+        if (innerClassAccessFlags == null)
+            return 0;
+        result = 0;
+        for (InnerClassAccessFlag innerClassAccessFlag : innerClassAccessFlags)
+            result |= innerClassAccessFlag.value;
+        return result;
+    }
+
     public static InnerClassAccessFlag[] getFromValue(short value) {
         ArrayList<InnerClassAccessFlag> result = new ArrayList<InnerClassAccessFlag>();
 
