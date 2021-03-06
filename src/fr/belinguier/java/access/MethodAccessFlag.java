@@ -30,6 +30,17 @@ public enum MethodAccessFlag {
         return this.value;
     }
 
+    public static short toValue(MethodAccessFlag... methodAccessFlags) {
+        short result;
+
+        if (methodAccessFlags == null)
+            return 0;
+        result = 0;
+        for (MethodAccessFlag methodAccessFlag : methodAccessFlags)
+            result |= methodAccessFlag.value;
+        return result;
+    }
+
     public static MethodAccessFlag[] getFromValue(short value) {
         ArrayList<MethodAccessFlag> result = new ArrayList<MethodAccessFlag>();
 
