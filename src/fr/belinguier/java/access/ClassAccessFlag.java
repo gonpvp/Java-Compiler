@@ -26,6 +26,17 @@ public enum ClassAccessFlag {
         return this.value;
     }
 
+    public static short toValue(ClassAccessFlag... classAccessFlags) {
+        short result;
+
+        if (classAccessFlags == null)
+            return 0;
+        result = 0;
+        for (ClassAccessFlag classAccessFlag : classAccessFlags)
+            result |= classAccessFlag.value;
+        return result;
+    }
+
     public static ClassAccessFlag[] getFromValue(short value) {
         ArrayList<ClassAccessFlag> result = new ArrayList<ClassAccessFlag>();
 
