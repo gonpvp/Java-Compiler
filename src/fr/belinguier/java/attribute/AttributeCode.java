@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Eliott Belinguier
  */
-public abstract class AttributeCode extends Attribute {
+public class AttributeCode extends Attribute {
 
     public short maxStack;
     public short maxLocals;
