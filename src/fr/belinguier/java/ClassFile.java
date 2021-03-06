@@ -4,44 +4,46 @@ import fr.belinguier.java.access.ClassAccessFlag;
 import fr.belinguier.java.attribute.Attribute;
 import fr.belinguier.java.compiler.Serializable;
 import fr.belinguier.java.constant.ConstantPool;
+import fr.belinguier.java.constant.ConstantUtf8;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Eliott Belinguier
  */
-public class ClassFile implements Serializable {
+public final class ClassFile implements Serializable {
+
+    private static final String COMPILER_AUTHOR = "Compiled by Eliott Belinguier Compiler";
 
     public int magicNumber;
     public short minorVersion;
     public short majorVersion;
-    private final List<ConstantPool> constantPools;
+    private final Set<ConstantPool> constantPools;
     public short accessFlags;
     public short classIndex;
     public short superClassNameIndex;
-    private final List<Short> interfaces;
-    private final List<Field> fields;
-    private final List<Method> methods;
-    private final List<Attribute> attributes;
+    private final Set<Short> interfaces;
+    private final Set<Field> fields;
+    private final Set<Method> methods;
+    private final Set<Attribute> attributes;
 
     public ClassFile() {
         this.magicNumber = 0xCAFEBABE;
         this.minorVersion = 0;
         this.majorVersion = 52;
         this.accessFlags = ClassAccessFlag.PUBLIC.getValue();
-        this.constantPools = new ArrayList<ConstantPool>();
-        this.interfaces = new ArrayList<Short>();
-        this.fields = new ArrayList<Field>();
-        this.methods = new ArrayList<Method>();
-        this.attributes = new ArrayList<Attribute>();
+        this.constantPools = new LinkedHashSet<ConstantPool>();
+        this.interfaces = new HashSet<Short>();
+        this.fields = new HashSet<Field>();
+        this.methods = new HashSet<Method>();
+        this.attributes = new HashSet<Attribute>();
     }
 
-    public List<ConstantPool> getConstantPools() {
+    public Set<ConstantPool> getConstantPools() {
         return this.constantPools;
     }
 
@@ -57,19 +59,19 @@ public class ClassFile implements Serializable {
         return ClassAccessFlag.getFromValue(this.accessFlags);
     }
 
-    public List<Short> getInterfaces() {
+    public Set<Short> getInterfaces() {
         return this.interfaces;
     }
 
-    public List<Field> getFields() {
+    public Set<Field> getFields() {
         return this.fields;
     }
 
-    public List<Method> getMethods() {
+    public Set<Method> getMethods() {
         return this.methods;
     }
 
-    public List<Attribute> getAttributes() {
+    public Set<Attribute> getAttributes() {
         return this.attributes;
     }
 
@@ -95,18 +97,24 @@ public class ClassFile implements Serializable {
 
     @Override
     public byte[] toByte() {
-        ByteBuffer byteBuffer = ByteBuffer.allocate(sizeOfByteArray());
+        ConstantUtf8 constantUtf8 = new ConstantUtf8();
+        ByteBuffer byteBuffer;
         byte[] temp;
+
+        constantUtf8.setString(COMPILER_AUTHOR);
+        byteBuffer = ByteBuffer.allocate(sizeOfByteArray() + constantUtf8.sizeOfByteArray());
 
         byteBuffer.putInt(magicNumber);
         byteBuffer.putShort(minorVersion);
         byteBuffer.putShort(majorVersion);
+        this.constantPools.add(constantUtf8);
         byteBuffer.putShort((short) (this.constantPools.size() + 1));
         for (ConstantPool constantPool : this.constantPools) {
             temp = constantPool.toByte();
             if (temp != null)
                 byteBuffer.put(temp);
         }
+        this.constantPools.remove(constantUtf8);
         byteBuffer.putShort(this.accessFlags);
         byteBuffer.putShort(this.classIndex);
         byteBuffer.putShort(this.superClassNameIndex);
