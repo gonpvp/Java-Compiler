@@ -23,14 +23,14 @@
         <url>https://github.com/eliott-belinguier</url>
     </organization>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
     <issueManagement>
         <system>github</system>
         <url>https://github.com/eliott-belinguier/Java-Compiler/issues</url>
     </issueManagement>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <build>
         <defaultGoal>clean install</defaultGoal>
