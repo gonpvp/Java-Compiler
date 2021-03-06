@@ -27,6 +27,17 @@ public enum FieldAccessFlag {
         return this.value;
     }
 
+    public static short toValue(FieldAccessFlag... fieldAccessFlags) {
+        short result;
+
+        if (fieldAccessFlags == null)
+            return 0;
+        result = 0;
+        for (FieldAccessFlag fieldAccessFlag : fieldAccessFlags)
+            result |= fieldAccessFlag.value;
+        return result;
+    }
+
     public static FieldAccessFlag[] getFromValue(short value) {
         ArrayList<FieldAccessFlag> result = new ArrayList<FieldAccessFlag>();
 
